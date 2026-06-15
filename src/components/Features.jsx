@@ -78,7 +78,7 @@ const colorMap = {
 
 export default function Features() {
   return (
-    <section className="section-glass border-t border-navy-100/60 py-16 sm:py-20 lg:py-28">
+    <section id="features" className="section-glass border-t border-navy-100/60 py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">

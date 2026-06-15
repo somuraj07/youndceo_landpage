@@ -58,7 +58,7 @@ export default function AppShowcase() {
   const current = tabs.find((t) => t.id === active)
 
   return (
-    <section id="features" className="py-16 sm:py-20 lg:py-28">
+    <section id="solutions" className="py-16 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold tracking-wide text-brand-600 uppercase sm:text-sm">
