@@ -45,17 +45,17 @@ export default function OverviewPage() {
       {/* Hero stats strip */}
       <FadeIn>
         <div className="dash-card overflow-hidden rounded-2xl">
-          <div className="grid grid-cols-2 divide-x divide-navy-100 lg:grid-cols-4">
+          <div className="grid grid-cols-2 divide-x divide-y divide-navy-100 md:grid-cols-4 md:divide-y-0">
             {kpis.map((kpi, i) => {
               const Icon = kpiIcons[i]
               return (
-                <motion.div key={kpi.label} className="p-4 sm:p-5" whileHover={{ backgroundColor: '#f8fafc' }}>
-                  <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br ${kpiColors[i]} text-white shadow-sm`}>
-                    <Icon className="h-4 w-4" />
+                <motion.div key={kpi.label} className="p-3 sm:p-4 md:p-5" whileHover={{ backgroundColor: '#f8fafc' }}>
+                  <div className={`mb-2 flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br sm:mb-3 sm:h-9 sm:w-9 ${kpiColors[i]} text-white shadow-sm`}>
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </div>
-                  <p className="font-display text-xl font-bold text-slate-900 sm:text-2xl">{kpi.value}</p>
-                  <div className="mt-0.5 flex items-center justify-between">
-                    <p className="text-xs text-slate-500">{kpi.label}</p>
+                  <p className="font-display text-lg font-bold text-slate-900 sm:text-xl md:text-2xl">{kpi.value}</p>
+                  <div className="mt-0.5 flex flex-col gap-0.5 xs:flex-row xs:items-center xs:justify-between">
+                    <p className="text-[11px] text-slate-500 sm:text-xs">{kpi.label}</p>
                     <span className="text-[10px] font-bold text-brand-600">{kpi.change}</span>
                   </div>
                 </motion.div>
@@ -86,21 +86,21 @@ export default function OverviewPage() {
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 lg:grid-cols-5">
-        <FadeIn delay={0.08} className="lg:col-span-2">
+      <div className="grid gap-4 md:grid-cols-5 md:gap-5">
+        <FadeIn delay={0.08} className="md:col-span-2">
           <StreakFlame count={user.streak} />
         </FadeIn>
-        <FadeIn delay={0.1} className="lg:col-span-3">
-          <div className="dash-card h-full rounded-2xl p-5">
-            <div className="mb-4 flex items-center justify-between">
+        <FadeIn delay={0.1} className="md:col-span-3">
+          <div className="dash-card h-full rounded-2xl p-4 sm:p-5">
+            <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h2 className="flex items-center gap-2 font-display text-base font-bold text-slate-900">
-                  <TrendingUp className="h-4 w-4 text-navy-600" />
+                <h2 className="flex items-center gap-2 font-display text-sm font-bold text-slate-900 sm:text-base">
+                  <TrendingUp className="h-4 w-4 shrink-0 text-navy-600" />
                   Activity Pulse
                 </h2>
                 <p className="text-muted text-xs">Learning + budgeting rhythm</p>
               </div>
-              <span className="rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-bold text-brand-700">
+              <span className="w-fit shrink-0 rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-bold text-brand-700">
                 +18% this week
               </span>
             </div>
@@ -110,7 +110,7 @@ export default function OverviewPage() {
       </div>
 
       {/* XP gauge + heatmap */}
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         <FadeIn delay={0.12}>
           <div className="dash-card rounded-2xl p-5 sm:p-6">
             <h2 className="flex items-center gap-2 font-display text-base font-bold text-slate-900">
@@ -135,12 +135,12 @@ export default function OverviewPage() {
       {/* Learning path preview */}
       <FadeIn delay={0.16}>
         <div className="dash-card rounded-2xl p-5 sm:p-6">
-          <div className="mb-2 flex items-center justify-between">
+          <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="font-display text-base font-bold text-slate-900">Learning Journey</h2>
+              <h2 className="font-display text-sm font-bold text-slate-900 sm:text-base">Learning Journey</h2>
               <p className="text-muted text-xs">Your constellation path to financial mastery</p>
             </div>
-            <Link to="/profile/learn" className="text-xs font-semibold text-brand-600 hover:text-brand-700">
+            <Link to="/profile/learn" className="shrink-0 text-xs font-semibold text-brand-600 hover:text-brand-700">
               View all →
             </Link>
           </div>

@@ -318,6 +318,20 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
+.profile-bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.profile-shell .dash-card {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .profile-shell .space-y-5 > * + * {
+    margin-top: 1rem;
+  }
+}
+
 @media (max-width: 380px) {
   .stat-divider {
     display: none;

@@ -55,8 +55,8 @@ export default function LearnPage() {
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 lg:grid-cols-3">
-        <FadeIn delay={0.08} className="lg:col-span-2">
+      <div className="grid gap-4 md:grid-cols-3 md:gap-5">
+        <FadeIn delay={0.08} className="md:col-span-2">
           <div className="dash-card rounded-2xl p-5 sm:p-6">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-display text-base font-bold text-slate-900">In Progress</h2>
@@ -71,17 +71,17 @@ export default function LearnPage() {
                   className="rounded-xl border border-navy-50 bg-gradient-to-r from-white to-navy-50/30 p-4"
                   whileHover={{ x: 4 }}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0 flex-1">
                       <span className="rounded-md bg-navy-100 px-2 py-0.5 text-[9px] font-bold text-navy-700">
                         {c.category}
                       </span>
                       <p className="mt-1.5 text-sm font-semibold text-slate-900">{c.title}</p>
                       <p className="flex items-center gap-1 text-xs text-slate-500">
-                        <Clock className="h-3 w-3" /> {c.hours}h · {c.modules} modules
+                        <Clock className="h-3 w-3 shrink-0" /> {c.hours}h · {c.modules} modules
                       </p>
                     </div>
-                    <button type="button" className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-navy-500 to-brand-500 px-3 py-1.5 text-[10px] font-semibold text-white shadow-sm">
+                    <button type="button" className="inline-flex w-full shrink-0 items-center justify-center gap-1 rounded-full bg-gradient-to-r from-navy-500 to-brand-500 px-3 py-2 text-[10px] font-semibold text-white shadow-sm sm:w-auto sm:py-1.5">
                       <PlayCircle className="h-3 w-3" /> Resume
                     </button>
                   </div>

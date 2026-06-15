@@ -105,7 +105,7 @@ export default function ChallengesPage() {
                       </div>
                     )}
                   </div>
-                  <button type="button" className="shrink-0 rounded-full bg-gradient-to-r from-brand-500 to-navy-500 px-5 py-2 text-xs font-semibold text-white shadow-md">
+                  <button type="button" className="w-full shrink-0 rounded-full bg-gradient-to-r from-brand-500 to-navy-500 px-5 py-2.5 text-xs font-semibold text-white shadow-md sm:w-auto">
                     {ch.progress > 0 ? 'Continue' : 'Start Quest'}
                   </button>
                 </div>

@@ -52,7 +52,7 @@ export default function AchievementsPage() {
         </div>
       </FadeIn>
 
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         <FadeIn delay={0.05}>
           <div className="dash-card rounded-2xl p-5 sm:p-6">
             <h2 className="font-display text-base font-bold text-slate-900">XP Mastery Arc</h2>

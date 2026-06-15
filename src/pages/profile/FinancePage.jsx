@@ -22,7 +22,7 @@ const totalTarget = goals.reduce((s, g) => s + g.target, 0)
 export default function FinancePage() {
   return (
     <div className="space-y-5">
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
         {[
           { label: 'Total Balance', value: '₹48,250', change: '+12.4%', up: true },
           { label: 'Spent This Month', value: `₹${totalSpent.toLocaleString()}`, change: `${Math.round((totalSpent / budgetTotal) * 100)}% of budget`, up: false },
@@ -41,7 +41,7 @@ export default function FinancePage() {
         ))}
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         <FadeIn delay={0.08}>
           <div className="dash-card rounded-2xl p-5 sm:p-6">
             <h2 className="flex items-center gap-2 font-display text-base font-bold text-slate-900">
@@ -76,7 +76,7 @@ export default function FinancePage() {
         </FadeIn>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-5">
         <FadeIn delay={0.12}>
           <div className="dash-card rounded-2xl p-5 sm:p-6">
             <h2 className="font-display text-base font-bold text-slate-900">Savings Tank</h2>
@@ -137,14 +137,14 @@ export default function FinancePage() {
             {transactions.map((tx) => (
               <motion.div
                 key={tx.label}
-                className="flex items-center justify-between py-3"
+                className="flex items-center justify-between gap-3 py-3"
                 whileHover={{ x: 4 }}
               >
-                <div>
-                  <p className="text-sm font-medium text-slate-900">{tx.label}</p>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-slate-900">{tx.label}</p>
                   <p className="text-[10px] text-slate-500">{tx.cat} · {tx.time}</p>
                 </div>
-                <span className={`font-display text-sm font-bold ${tx.amount > 0 ? 'text-brand-600' : 'text-slate-800'}`}>
+                <span className={`shrink-0 font-display text-sm font-bold ${tx.amount > 0 ? 'text-brand-600' : 'text-slate-800'}`}>
                   {tx.amount > 0 ? '+' : ''}₹{Math.abs(tx.amount).toLocaleString()}
                 </span>
               </motion.div>

@@ -21,30 +21,32 @@ export default function SettingsPage() {
   })
 
   return (
-    <div className="grid gap-5 lg:grid-cols-4">
+    <div className="grid gap-4 md:gap-5 lg:grid-cols-4">
       <FadeIn className="lg:col-span-1">
         <div className="dash-card rounded-2xl p-2">
-          {sections.map((s) => {
-            const Icon = s.icon
-            return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => setActive(s.id)}
-                className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
-                  active === s.id
-                    ? 'bg-navy-50 text-navy-700'
-                    : 'text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                {s.label}
-              </button>
-            )
-          })}
+          <div className="scroll-tabs -mx-1 flex gap-1 overflow-x-auto px-1 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:pb-0">
+            {sections.map((s) => {
+              const Icon = s.icon
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => setActive(s.id)}
+                  className={`flex shrink-0 items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-medium transition-all sm:text-sm lg:w-full lg:gap-3 ${
+                    active === s.id
+                      ? 'bg-navy-50 text-navy-700'
+                      : 'text-slate-600 hover:bg-slate-50'
+                  }`}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  {s.label}
+                </button>
+              )
+            })}
+          </div>
           <button
             type="button"
-            className="mt-2 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50"
+            className="mt-2 hidden w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 lg:flex"
           >
             <LogOut className="h-4 w-4" />
             Sign Out
@@ -53,14 +55,14 @@ export default function SettingsPage() {
       </FadeIn>
 
       <FadeIn delay={0.05} className="lg:col-span-3">
-        <div className="dash-card rounded-2xl p-5 sm:p-6">
+        <div className="dash-card rounded-2xl p-4 sm:p-5 md:p-6">
           {active === 'profile' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-display text-base font-bold text-slate-900">Profile Settings</h2>
-              <p className="text-muted mb-6 text-xs">Manage your account details</p>
+              <p className="text-muted mb-5 text-xs sm:mb-6">Manage your account details</p>
 
-              <div className="mb-6 flex items-center gap-4">
-                <div className="relative">
+              <div className="mb-5 flex flex-col items-center gap-3 sm:mb-6 sm:flex-row sm:items-center sm:gap-4">
+                <div className="relative shrink-0">
                   <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-500 to-brand-500 text-lg font-bold text-white">
                     {user.initials}
                   </div>
@@ -68,7 +70,7 @@ export default function SettingsPage() {
                     <Camera className="h-3 w-3 text-slate-600" />
                   </button>
                 </div>
-                <div>
+                <div className="text-center sm:text-left">
                   <p className="font-display font-bold text-slate-900">{user.name}</p>
                   <p className="text-xs text-slate-500">Member since {user.memberSince}</p>
                 </div>
@@ -89,7 +91,7 @@ export default function SettingsPage() {
                     />
                   </div>
                 ))}
-                <button type="button" className="rounded-full bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-500/25">
+                <button type="button" className="w-full rounded-full bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-500/25 sm:w-auto">
                   Save Changes
                 </button>
               </div>
@@ -99,15 +101,15 @@ export default function SettingsPage() {
           {active === 'notifications' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-display text-base font-bold text-slate-900">Notifications</h2>
-              <p className="text-muted mb-6 text-xs">Choose what you want to be notified about</p>
+              <p className="text-muted mb-5 text-xs sm:mb-6">Choose what you want to be notified about</p>
               <div className="space-y-3">
                 {Object.entries(notifications).map(([key, on]) => (
-                  <div key={key} className="flex items-center justify-between rounded-xl border border-navy-50 bg-slate-50/50 px-4 py-3">
+                  <div key={key} className="flex items-center justify-between gap-3 rounded-xl border border-navy-50 bg-slate-50/50 px-3 py-3 sm:px-4">
                     <span className="text-sm font-medium capitalize text-slate-800">{key} alerts</span>
                     <button
                       type="button"
                       onClick={() => setNotifications((n) => ({ ...n, [key]: !on }))}
-                      className={`relative h-6 w-11 rounded-full transition-colors ${on ? 'bg-brand-500' : 'bg-slate-300'}`}
+                      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${on ? 'bg-brand-500' : 'bg-slate-300'}`}
                     >
                       <span
                         className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${on ? 'left-5' : 'left-0.5'}`}
@@ -122,12 +124,12 @@ export default function SettingsPage() {
           {active === 'privacy' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-display text-base font-bold text-slate-900">Privacy & Security</h2>
-              <p className="text-muted mb-6 text-xs">Control your data and account security</p>
+              <p className="text-muted mb-5 text-xs sm:mb-6">Control your data and account security</p>
               <div className="space-y-3">
                 {['Two-factor authentication', 'Biometric login', 'Hide balance on home screen', 'Share progress with friends'].map((item) => (
-                  <div key={item} className="flex items-center justify-between rounded-xl border border-navy-50 px-4 py-3">
+                  <div key={item} className="flex items-center justify-between gap-3 rounded-xl border border-navy-50 px-3 py-3 sm:px-4">
                     <span className="text-sm text-slate-800">{item}</span>
-                    <button type="button" className="relative h-6 w-11 rounded-full bg-slate-300">
+                    <button type="button" className="relative h-6 w-11 shrink-0 rounded-full bg-slate-300">
                       <span className="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow" />
                     </button>
                   </div>
@@ -139,8 +141,8 @@ export default function SettingsPage() {
           {active === 'appearance' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-display text-base font-bold text-slate-900">Appearance</h2>
-              <p className="text-muted mb-6 text-xs">Customize how YoungCEO looks</p>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <p className="text-muted mb-5 text-xs sm:mb-6">Customize how YoungCEO looks</p>
+              <div className="grid grid-cols-1 gap-3 xs:grid-cols-3">
                 {[
                   { name: 'Light', active: true, bg: 'bg-white border-navy-200' },
                   { name: 'Ocean', active: false, bg: 'bg-navy-50 border-navy-300' },
