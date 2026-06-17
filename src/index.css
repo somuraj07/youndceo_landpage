@@ -318,7 +318,8 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
-.profile-bottom-nav {
+.profile-bottom-nav,
+.site-bottom-nav {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 

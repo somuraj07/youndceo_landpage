@@ -8,7 +8,7 @@ export default function Layout() {
   const isProfile = pathname.startsWith('/profile')
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
       <AIBackground />
       <Navbar />
       <Outlet />

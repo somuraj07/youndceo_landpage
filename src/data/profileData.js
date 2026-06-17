@@ -1,14 +1,28 @@
 export const user = {
-  name: 'Rahul Sharma',
-  initials: 'RS',
+  name: 'Mr. Gowtham Kumar',
+  displayName: 'Gowtham Kumar',
+  initials: 'GK',
+  avatar: '/profile/gowtham-kumar.png',
   level: 7,
   xp: 2450,
   xpTarget: 3000,
   xpPercent: 82,
   streak: 21,
-  tagline: 'Finance Learner',
+  tagline: 'AMFI Registered Mutual Fund Distributor',
+  role: 'Founder',
   memberSince: 'Jan 2025',
-  email: 'rahul.sharma@email.com',
+  email: 'gowthamtv.in@gmail.com',
+  phones: ['9492041246', '9124549333'],
+  phone: '9492041246',
+  amfiRegNo: 'ARN-345215',
+  euin: 'E656737',
+  address: 'H No 10-3, Geetanjali College Street, Bhimadolu Mandal, Polasanipalli, West Godavari — 534425',
+}
+
+export const contact = {
+  email: user.email,
+  phones: user.phones,
+  phoneDisplay: user.phones.map((p) => `+91 ${p}`),
 }
 
 export const kpis = [

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { User, Bell, Shield, Palette, LogOut, Camera } from 'lucide-react'
 import { FadeIn } from '../../components/motion'
 import { user } from '../../data/profileData'
+import ProfileAvatar from '../../components/profile/ProfileAvatar'
 
 const sections = [
   { id: 'profile', label: 'Profile', icon: User },
@@ -63,16 +64,15 @@ export default function SettingsPage() {
 
               <div className="mb-5 flex flex-col items-center gap-3 sm:mb-6 sm:flex-row sm:items-center sm:gap-4">
                 <div className="relative shrink-0">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-navy-500 to-brand-500 text-lg font-bold text-white">
-                    {user.initials}
-                  </div>
+                  <ProfileAvatar size="xl" />
                   <button type="button" className="absolute -right-1 -bottom-1 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-slate-200">
                     <Camera className="h-3 w-3 text-slate-600" />
                   </button>
                 </div>
                 <div className="text-center sm:text-left">
                   <p className="font-display font-bold text-slate-900">{user.name}</p>
-                  <p className="text-xs text-slate-500">Member since {user.memberSince}</p>
+                  <p className="text-xs text-slate-500">{user.tagline}</p>
+                  <p className="mt-0.5 text-xs text-slate-400">Member since {user.memberSince}</p>
                 </div>
               </div>
 
@@ -80,7 +80,11 @@ export default function SettingsPage() {
                 {[
                   { label: 'Full Name', value: user.name },
                   { label: 'Email', value: user.email },
-                  { label: 'Phone', value: '+91 98765 43210' },
+                  { label: 'Phone (Primary)', value: `+91 ${user.phones[0]}` },
+                  { label: 'Phone (Alternate)', value: `+91 ${user.phones[1]}` },
+                  { label: 'AMFI Regn No', value: user.amfiRegNo },
+                  { label: 'EUIN', value: user.euin },
+                  { label: 'Address', value: user.address },
                 ].map((field) => (
                   <div key={field.label}>
                     <label className="mb-1 block text-xs font-medium text-slate-600">{field.label}</label>

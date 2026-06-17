@@ -1,7 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Menu, X, TrendingUp, ArrowRight } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import {
+  TrendingUp,
+  Home,
+  Sparkles,
+  LineChart,
+  User,
+  Download,
+  LayoutDashboard,
+  GraduationCap,
+  Wallet,
+  Trophy,
+  Settings,
+} from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const homeNav = [
   { label: 'Solutions', href: '/#solutions' },
@@ -18,6 +30,22 @@ const profileNav = [
   { label: 'Home', href: '/' },
 ]
 
+const mobileHomeLinks = [
+  { label: 'Home', href: '/', icon: Home, exact: true },
+  { label: 'Features', href: '/#features', icon: Sparkles },
+  { label: 'Markets', href: '/#markets', icon: LineChart },
+  { label: 'Profile', href: '/profile', icon: User },
+  { label: 'App', href: '/#download', icon: Download },
+]
+
+const mobileProfileLinks = [
+  { label: 'Overview', href: '/profile', icon: LayoutDashboard, exact: true },
+  { label: 'Learn', href: '/profile/learn', icon: GraduationCap },
+  { label: 'Finance', href: '/profile/finance', icon: Wallet },
+  { label: 'Badges', href: '/profile/achievements', icon: Trophy },
+  { label: 'Settings', href: '/profile/settings', icon: Settings },
+]
+
 function scrollToHash(hash, offset = 100) {
   if (!hash) return
   const id = hash.replace('#', '')
@@ -28,12 +56,12 @@ function scrollToHash(hash, offset = 100) {
 }
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { pathname, hash } = useLocation()
   const navigate = useNavigate()
   const isProfile = pathname.startsWith('/profile')
   const links = isProfile ? profileNav : homeNav
+  const mobileLinks = isProfile ? mobileProfileLinks : mobileHomeLinks
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -48,13 +76,7 @@ export default function Navbar() {
     }
   }, [pathname, hash])
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
-
   const handleNavClick = (e, href) => {
-    setOpen(false)
     if (!href.includes('#')) return
 
     const hashPart = href.slice(href.indexOf('#'))
@@ -70,17 +92,19 @@ export default function Navbar() {
     }
   }
 
-  const isLinkActive = (href) => {
-    if (isProfile) return pathname === href
+  const isLinkActive = (href, exact = false) => {
     if (href.includes('#')) {
       const section = href.split('#')[1]
       return pathname === '/' && hash === `#${section}`
     }
-    return pathname === href
+    if (exact) return pathname === href
+    if (isProfile && href === '/profile') return pathname === '/profile'
+    return pathname === href || (href !== '/' && pathname.startsWith(href))
   }
 
   return (
     <>
+      {/* Top bar — logo only on mobile, full nav on desktop */}
       <motion.header
         className="fixed top-0 left-0 right-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4 lg:px-6"
         initial={{ y: -24, opacity: 0 }}
@@ -94,8 +118,7 @@ export default function Navbar() {
               : 'border-white/60 bg-white/85 shadow-md shadow-navy-500/5 backdrop-blur-lg'
           }`}
         >
-          {/* Logo */}
-          <Link to="/" className="flex shrink-0 items-center gap-2 pl-1 sm:gap-2.5 sm:pl-2">
+          <Link to="/" className="flex shrink-0 items-center gap-2 pl-1 sm:gap-2.5 sm:pl-2 lg:pl-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 via-navy-500 to-gold-400 shadow-sm sm:h-9 sm:w-9">
               <TrendingUp className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
             </div>
@@ -104,7 +127,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop links — Timelly-style center nav */}
+          {/* Desktop center links */}
           <ul className="hidden flex-1 items-center justify-center gap-1 lg:flex xl:gap-2">
             {links.map((link) => {
               const active = isLinkActive(link.href)
@@ -114,9 +137,7 @@ export default function Navbar() {
                     to={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`relative rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors xl:px-4 xl:text-sm ${
-                      active
-                        ? 'text-navy-700'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      active ? 'text-navy-700' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     }`}
                   >
                     {link.label}
@@ -132,7 +153,7 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Desktop CTA — Timelly "Book a Demo" style */}
+          {/* Desktop CTAs */}
           <div className="hidden shrink-0 items-center gap-2 lg:flex">
             {!isProfile && (
               <Link
@@ -143,90 +164,48 @@ export default function Navbar() {
               </Link>
             )}
             <Link
-              to={isProfile ? '/#download' : '/#download'}
+              to="/#download"
               onClick={(e) => handleNavClick(e, '/#download')}
-              className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-[13px] font-semibold text-white shadow-md transition-all hover:bg-slate-800 hover:shadow-lg xl:px-5 xl:text-sm"
+              className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2.5 text-[13px] font-semibold text-white shadow-md transition-all hover:bg-slate-800 xl:px-5 xl:text-sm"
             >
               {isProfile ? 'Get the App' : 'Download Free'}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-100 lg:hidden"
-            onClick={() => setOpen(!open)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          {/* Spacer on mobile so logo stays left-aligned in flex layout */}
+          <div className="w-9 lg:hidden" aria-hidden />
         </nav>
       </motion.header>
 
-      {/* Mobile drawer — Timelly clean list */}
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-sm lg:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              className="fixed top-[4.5rem] right-3 left-3 z-50 overflow-hidden rounded-2xl border border-white/80 bg-white/98 shadow-2xl shadow-slate-900/10 backdrop-blur-xl sm:right-4 sm:left-4 lg:hidden"
-              initial={{ opacity: 0, y: -8, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <ul className="p-2">
-                {links.map((link, i) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
-                        isLinkActive(link.href)
-                          ? 'bg-navy-50 text-navy-700'
-                          : 'text-slate-700 hover:bg-slate-50'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-              <div className="space-y-2 border-t border-slate-100 p-3">
-                {!isProfile && (
-                  <Link
-                    to="/profile"
-                    onClick={() => setOpen(false)}
-                    className="block w-full rounded-full border border-slate-200 py-3 text-center text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
-                  >
-                    My Profile
-                  </Link>
-                )}
+      {/* Mobile bottom tab bar */}
+      <nav className="site-bottom-nav fixed bottom-0 left-0 right-0 z-50 border-t border-white/80 bg-white/95 backdrop-blur-xl lg:hidden">
+        <ul className="mx-auto flex max-w-lg items-stretch justify-around px-1 py-1.5">
+          {mobileLinks.map((link) => {
+            const Icon = link.icon
+            const active = isLinkActive(link.href, link.exact)
+            return (
+              <li key={link.href} className="flex-1">
                 <Link
-                  to="/#download"
-                  onClick={(e) => handleNavClick(e, '/#download')}
-                  className="group flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 py-3 text-sm font-semibold text-white shadow-md"
+                  to={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`flex flex-col items-center gap-0.5 rounded-xl px-1 py-1.5 text-[9px] font-semibold transition-colors ${
+                    active ? 'text-brand-600' : 'text-slate-500'
+                  }`}
                 >
-                  Download Free
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  <span
+                    className={`flex h-8 w-8 items-center justify-center rounded-xl transition-colors ${
+                      active ? 'bg-brand-50 text-brand-600' : 'text-slate-500'
+                    }`}
+                  >
+                    <Icon className="h-[18px] w-[18px]" strokeWidth={active ? 2.5 : 2} />
+                  </span>
+                  {link.label}
                 </Link>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
     </>
   )
 }

@@ -2,7 +2,6 @@ import {
   BookOpen,
   Wallet,
   LineChart,
-  User,
   Sun,
   Utensils,
   Bus,
@@ -13,6 +12,7 @@ import {
   Star,
   Coins,
 } from 'lucide-react'
+import { user } from '../data/profileData'
 
 const quickActions = [
   { label: 'Courses', icon: BookOpen, bg: 'bg-brand-50 text-brand-700' },
@@ -35,11 +35,13 @@ export const phoneScreens = {
           <p className="flex items-center gap-1 text-[10px] text-slate-500">
             <Sun className="h-3 w-3" /> Good morning
           </p>
-          <p className="text-sm font-bold text-slate-900">Rahul Sharma</p>
+          <p className="text-sm font-bold text-slate-900">{user.displayName}</p>
         </div>
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-navy-400 shadow-sm">
-          <User className="h-4 w-4 text-white" />
-        </div>
+        <img
+          src={user.avatar}
+          alt={user.name}
+          className="h-8 w-8 rounded-full object-cover ring-2 ring-white shadow-sm"
+        />
       </div>
       <div className="mb-4 rounded-xl bg-gradient-to-br from-brand-500 via-navy-500 to-navy-600 p-3 shadow-md shadow-navy-500/20">
         <p className="flex items-center gap-1 text-[10px] text-white/80">

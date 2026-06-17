@@ -10,6 +10,7 @@ import {
   Flame,
 } from 'lucide-react'
 import { user } from '../../data/profileData'
+import ProfileAvatar from './ProfileAvatar'
 
 const icons = {
   LayoutDashboard,
@@ -43,17 +44,10 @@ export default function ProfileSidebar() {
 
         <div className="rounded-xl bg-gradient-to-br from-navy-500 via-brand-500 to-navy-600 p-4 text-white">
           <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/20 text-sm font-bold backdrop-blur-sm ring-2 ring-white/30">
-                {user.initials}
-              </div>
-              <span className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-gold-400 text-[9px] font-bold text-navy-900 ring-2 ring-white">
-                {user.level}
-              </span>
-            </div>
+            <ProfileAvatar size="md" showLevel />
             <div className="min-w-0">
               <p className="truncate font-display text-sm font-bold">{user.name}</p>
-              <p className="text-[10px] text-white/75">{user.tagline}</p>
+              <p className="line-clamp-2 text-[10px] text-white/75">{user.tagline}</p>
             </div>
           </div>
           <div className="mt-3 flex items-center gap-2 rounded-lg bg-white/15 px-2.5 py-1.5">

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Send, CheckCircle2, Mail, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { FadeIn, HoverButton } from './motion'
+import { contact } from '../data/profileData'
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -35,7 +36,7 @@ export default function ContactForm() {
 
             <div className="mt-8 space-y-4">
               <motion.a
-                href="mailto:hello@youngceo.app"
+                href={`mailto:${contact.email}`}
                 className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white px-4 py-3 shadow-sm"
                 whileHover={{ x: 4, borderColor: 'rgba(147, 197, 253, 0.8)' }}
               >
@@ -44,21 +45,25 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <p className="text-xs text-slate-500">Email us</p>
-                  <p className="text-sm font-semibold text-slate-900">hello@youngceo.app</p>
+                  <p className="text-sm font-semibold text-slate-900">{contact.email}</p>
                 </div>
               </motion.a>
-              <motion.div
-                className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white px-4 py-3 shadow-sm"
-                whileHover={{ x: 4, borderColor: 'rgba(134, 239, 172, 0.8)' }}
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
-                  <Phone className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500">Call us</p>
-                  <p className="text-sm font-semibold text-slate-900">+91 98765 43210</p>
-                </div>
-              </motion.div>
+              {contact.phones.map((phone, i) => (
+                <motion.a
+                  key={phone}
+                  href={`tel:+91${phone}`}
+                  className="flex items-center gap-3 rounded-xl border border-navy-100 bg-white px-4 py-3 shadow-sm"
+                  whileHover={{ x: 4, borderColor: 'rgba(134, 239, 172, 0.8)' }}
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500">{i === 0 ? 'Call us' : 'Alternate number'}</p>
+                    <p className="text-sm font-semibold text-slate-900">+91 {phone}</p>
+                  </div>
+                </motion.a>
+              ))}
             </div>
           </FadeIn>
 
