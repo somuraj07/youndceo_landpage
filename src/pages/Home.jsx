@@ -3,7 +3,6 @@ import MarketTicker from '../components/MarketTicker'
 import WhyChoose from '../components/WhyChoose'
 import AppShowcase from '../components/AppShowcase'
 import Features from '../components/Features'
-import Courses from '../components/Courses'
 import Process from '../components/Process'
 import AboutUs from '../components/AboutUs'
 import ContactForm from '../components/ContactForm'
@@ -17,7 +16,6 @@ export default function Home() {
       <WhyChoose />
       <AppShowcase />
       <Features />
-      <Courses />
       <Process />
       <AboutUs />
       <ContactForm />

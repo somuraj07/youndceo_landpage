@@ -99,9 +99,9 @@ export const phoneScreens = {
         ))}
       </div>
       {[
-        { title: 'Stock Market Mastery', price: '₹999', rating: '4.9', lessons: 24, grad: 'from-navy-300 to-brand-300', icon: LineChart },
-        { title: 'Personal Budgeting 101', price: '₹499', rating: '4.8', lessons: 12, grad: 'from-brand-300 to-navy-200', icon: Wallet },
-        { title: 'Crypto Fundamentals', price: '₹799', rating: '4.7', lessons: 18, grad: 'from-gold-300 to-brand-200', icon: Coins },
+        { title: 'Stock Market Mastery', rating: '4.9', lessons: 24, grad: 'from-navy-300 to-brand-300', icon: LineChart },
+        { title: 'Personal Budgeting 101', rating: '4.8', lessons: 12, grad: 'from-brand-300 to-navy-200', icon: Wallet },
+        { title: 'Crypto Fundamentals', rating: '4.7', lessons: 18, grad: 'from-gold-300 to-brand-200', icon: Coins },
       ].map((course) => {
         const Icon = course.icon
         return (
@@ -113,8 +113,7 @@ export const phoneScreens = {
               <Icon className="h-4 w-4 text-white" />
             </div>
             <p className="text-[10px] font-semibold text-slate-900">{course.title}</p>
-            <div className="mt-1 flex items-center justify-between">
-              <span className="text-[9px] font-bold text-brand-600">{course.price}</span>
+            <div className="mt-1 flex items-center justify-end">
               <span className="flex items-center gap-0.5 text-[9px] text-slate-500">
                 <Star className="h-2.5 w-2.5 fill-gold-400 text-gold-400" />
                 {course.rating} · {course.lessons} lessons

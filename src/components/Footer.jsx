@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom'
-import { TrendingUp, Share2, MessageCircle, PlayCircle, Mail } from 'lucide-react'
+import { Share2, MessageCircle, PlayCircle, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { FadeIn } from './motion'
+import { contact } from '../data/profileData'
 
 const footerLinks = {
-  Product: ['Features', 'Courses', 'Markets', 'Pricing'],
+  Product: ['Features', 'Markets', 'Download'],
   Company: ['About Us', 'Careers', 'Blog', 'Contact'],
   Legal: ['Privacy Policy', 'Terms of Service', 'Refund Policy'],
 }
+
+const whatsappHref = `https://wa.me/91${contact.phones[0]}?text=${encodeURIComponent('Hi YoungCEO, I would like to know more.')}`
 
 export default function Footer() {
   return (
@@ -15,13 +18,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-5 lg:gap-12">
           <FadeIn className="col-span-2">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 via-navy-500 to-gold-400 shadow-md">
-                <TrendingUp className="h-5 w-5 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="font-display text-xl font-bold text-slate-900">
-                Young<span className="text-brand-600">CEO</span>
-              </span>
+            <Link to="/" className="inline-flex items-center" aria-label="YoungCEO home">
+              <img
+                src="/youngceo-logo.png"
+                alt="YoungCEO"
+                className="h-12 w-12 rounded-2xl object-cover shadow-md ring-1 ring-white/70"
+              />
             </Link>
             <p className="text-muted mt-3 max-w-sm text-xs leading-relaxed sm:mt-4 sm:text-sm">
               One unified platform for students to learn finance, track expenses,
@@ -29,10 +31,17 @@ export default function Footer() {
               build your financial future today.
             </p>
             <div className="mt-5 flex gap-2.5 sm:mt-6 sm:gap-3">
-              {[Share2, MessageCircle, PlayCircle, Mail].map((Icon, i) => (
+              {[
+                { Icon: Share2, href: '#' },
+                { Icon: MessageCircle, href: whatsappHref },
+                { Icon: PlayCircle, href: '#' },
+                { Icon: Mail, href: `mailto:${contact.email}` },
+              ].map(({ Icon, href }, i) => (
                 <motion.a
                   key={i}
-                  href="#"
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noreferrer' : undefined}
                   className="flex h-9 w-9 items-center justify-center rounded-xl border border-navy-100 bg-navy-50 text-navy-500"
                   whileHover={{
                     scale: 1.12,
@@ -52,16 +61,26 @@ export default function Footer() {
             <FadeIn key={title} delay={0.1}>
               <h4 className="text-xs font-semibold text-slate-900 sm:text-sm">{title}</h4>
               <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
-                {links.map((link) => (
+                {links.map((link) => {
+                  const href =
+                    link === 'Contact' ? '/#contact' :
+                    link === 'Features' ? '/#features' :
+                    link === 'Markets' ? '/#markets' :
+                    link === 'Download' ? '/#download' :
+                    link === 'About Us' ? '/#about' :
+                    '/'
+
+                  return (
                   <li key={link}>
                     <Link
-                      to={link === 'Contact' ? '/#contact' : '/'}
+                      to={href}
                       className="text-muted text-xs sm:text-sm"
                     >
                       {link}
                     </Link>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
             </FadeIn>
           ))}

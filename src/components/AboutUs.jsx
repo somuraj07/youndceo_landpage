@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, BadgeCheck, Shield, Crown } from 'lucide-react'
+import { Mail, MessageCircle, MapPin, BadgeCheck, Shield, Crown } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { FadeIn, HoverCard } from './motion'
 import { user, contact } from '../data/profileData'
@@ -9,15 +9,17 @@ const credentials = [
   { label: 'Role', value: user.role, icon: Crown },
 ]
 
+const whatsappMessage = encodeURIComponent('Hi YoungCEO, I would like to know more.')
+
 export default function AboutUs() {
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-28">
+    <section id="about" className="py-14 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold tracking-wide text-brand-600 uppercase sm:text-sm">
             About Us
           </p>
-          <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
+          <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             Meet the{' '}
             <span className="gradient-text">Founder</span>
           </h2>
@@ -27,12 +29,12 @@ export default function AboutUs() {
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1} className="mt-10 sm:mt-12">
+        <FadeIn delay={0.1} className="mx-auto mt-8 max-w-5xl sm:mt-10">
           <HoverCard className="glass-card overflow-hidden rounded-2xl sm:rounded-3xl">
-            <div className="grid md:grid-cols-2 md:items-start">
+            <div className="grid md:grid-cols-[0.9fr_1.1fr] md:items-start">
               {/* Full founder photo — no crop */}
               <motion.div
-                className="flex items-center justify-center bg-gradient-to-br from-slate-100 via-white to-navy-50/60 p-4 sm:p-6 md:sticky md:top-24 md:p-8"
+                className="flex items-center justify-center bg-gradient-to-br from-slate-100 via-white to-navy-50/60 p-4 sm:p-5 md:sticky md:top-24 md:p-6"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -41,18 +43,18 @@ export default function AboutUs() {
                 <img
                   src={user.avatar}
                   alt={user.name}
-                  className="h-auto w-full max-w-sm object-contain sm:max-w-md md:max-w-full md:max-h-[85vh]"
+                  className="h-auto w-full max-w-xs object-contain sm:max-w-sm md:max-h-[540px] md:max-w-md"
                 />
               </motion.div>
 
               {/* Founder details */}
-              <div className="flex flex-col border-t border-navy-100/60 p-5 sm:p-8 md:border-t-0 md:border-l">
+              <div className="flex flex-col border-t border-navy-100/60 p-5 sm:p-7 md:border-t-0 md:border-l">
                 <div>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-100 px-3 py-1 text-[10px] font-bold text-gold-700 uppercase tracking-wide sm:text-xs">
                     <Crown className="h-3.5 w-3.5" />
                     Founder · YoungCEO
                   </span>
-                  <h3 className="font-display mt-3 text-2xl font-bold text-slate-900 sm:text-3xl">
+                  <h3 className="font-display mt-3 text-xl font-bold text-slate-900 sm:text-2xl">
                     {user.name}
                   </h3>
                   <p className="mt-1 text-sm font-medium text-brand-600">{user.tagline}</p>
@@ -105,15 +107,17 @@ export default function AboutUs() {
                     {contact.phones.map((phone, i) => (
                       <motion.a
                         key={phone}
-                        href={`tel:+91${phone}`}
+                        href={`https://wa.me/91${phone}?text=${whatsappMessage}`}
+                        target="_blank"
+                        rel="noreferrer"
                         className="flex items-center gap-3 rounded-xl border border-navy-50 bg-white px-4 py-3 transition-colors hover:border-brand-200 hover:bg-brand-50/30"
                         whileHover={{ x: 4 }}
                       >
                         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
-                          <Phone className="h-4 w-4" />
+                          <MessageCircle className="h-4 w-4" />
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500">{i === 0 ? 'Primary' : 'Alternate'}</p>
+                          <p className="text-[10px] text-slate-500">{i === 0 ? 'Primary WhatsApp' : 'Alternate WhatsApp'}</p>
                           <p className="text-sm font-semibold text-slate-900">+91 {phone}</p>
                         </div>
                       </motion.a>

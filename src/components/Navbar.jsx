@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
-  TrendingUp,
   Home,
   Sparkles,
   LineChart,
@@ -112,19 +111,18 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <nav
-          className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 transition-all duration-300 sm:rounded-full sm:px-4 sm:py-3 lg:px-5 ${
+          className={`mr-auto flex w-fit max-w-6xl items-center justify-between gap-3 rounded-2xl border px-2 py-2 transition-all duration-300 sm:rounded-full lg:mx-auto lg:w-full lg:px-5 lg:py-3 ${
             scrolled
               ? 'border-white/80 bg-white/95 shadow-lg shadow-slate-900/8 backdrop-blur-xl'
               : 'border-white/60 bg-white/85 shadow-md shadow-navy-500/5 backdrop-blur-lg'
           }`}
         >
-          <Link to="/" className="flex shrink-0 items-center gap-2 pl-1 sm:gap-2.5 sm:pl-2 lg:pl-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 via-navy-500 to-gold-400 shadow-sm sm:h-9 sm:w-9">
-              <TrendingUp className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]" strokeWidth={2.5} />
-            </div>
-            <span className="font-display text-base font-bold tracking-tight text-slate-900 sm:text-lg">
-              Young<span className="text-brand-600">CEO</span>
-            </span>
+          <Link to="/" className="flex shrink-0 items-center lg:pl-2" aria-label="YoungCEO home">
+            <img
+              src="/youngceo-logo.png"
+              alt="YoungCEO"
+              className="h-9 w-9 rounded-xl object-cover shadow-sm ring-1 ring-white/70 sm:h-10 sm:w-10"
+            />
           </Link>
 
           {/* Desktop center links */}
@@ -172,8 +170,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Spacer on mobile so logo stays left-aligned in flex layout */}
-          <div className="w-9 lg:hidden" aria-hidden />
         </nav>
       </motion.header>
 
